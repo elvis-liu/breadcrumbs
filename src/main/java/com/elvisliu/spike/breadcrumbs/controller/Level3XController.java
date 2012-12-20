@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created with IntelliJ IDEA.
  * User: yfliu
  * Date: 12/18/12
- * Time: 10:32 PM
+ * Time: 10:42 PM
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value= "/level2b")
-@Navigation(infoProvider = Level2BInfoProvider.class, parent=StartController.class)
-public class Level2BController {
+@RequestMapping(value= "/level3x")
+@Navigation(url="level3x", name="Level3X", parent= {Level2BController.class, Level2AController.class})
+public class Level3XController {
     @RequestMapping(method= RequestMethod.GET)
     public String view() {
-        return "level2b";
+        return "level3x";
     }
 }

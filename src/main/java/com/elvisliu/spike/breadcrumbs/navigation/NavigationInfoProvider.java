@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
  * Time: 8:38 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface NavigationEntryGenerator {
-    public NavigationEntry generate(HttpSession currentSession);
+public interface NavigationInfoProvider {
+    String getUrl(HttpSession session);
+    String getName(HttpSession session);
 }

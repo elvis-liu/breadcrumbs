@@ -6,7 +6,7 @@
 </head>
 <body>
     <p>
-        Random id is ${randomId}
+        Random id is ${randomId}, will be used as level2b navigation name.
     </p>
 
     <p>

@@ -15,5 +15,5 @@ public @interface Navigation {
     Class<? extends Object>[] parent() default {};
     String[] url() default {};
     String[] name() default {};
-    Class<? extends NavigationEntryGenerator>[] pageGenerator() default {};
+    Class<? extends NavigationInfoProvider>[] infoProvider() default {};
 }

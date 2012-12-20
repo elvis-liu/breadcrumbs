@@ -10,6 +10,7 @@ package com.elvisliu.spike.breadcrumbs.navigation;
 public class NavigationEntry {
     private String url;
     private String name;
+    private Class<? extends Object> navigationClass;
 
     public String getUrl() {
         return url;
@@ -25,5 +26,13 @@ public class NavigationEntry {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Class<? extends Object> getNavigationClass() {
+        return navigationClass;
+    }
+
+    public void setNavigationClass(Class<? extends Object> navigationClass) {
+        this.navigationClass = navigationClass;
     }
 }
