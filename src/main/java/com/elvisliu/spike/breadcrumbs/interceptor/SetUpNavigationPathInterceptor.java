@@ -1,8 +1,10 @@
 package com.elvisliu.spike.breadcrumbs.interceptor;
 
-import com.elvisliu.spike.breadcrumbs.navigation.*;
 import com.elvisliu.spike.breadcrumbs.navigation.DefaultNavigationInfoProvider;
+import com.elvisliu.spike.breadcrumbs.navigation.Navigation;
+import com.elvisliu.spike.breadcrumbs.navigation.NavigationEntry;
 import com.elvisliu.spike.breadcrumbs.navigation.NavigationInfoProvider;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -26,15 +28,17 @@ public class SetUpNavigationPathInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         HttpSession currentSession = request.getSession();
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        Class<? extends Object> entryClass = handlerMethod.getBean().getClass();
 
-        if (handler.getClass().isAnnotationPresent(Navigation.class)) {
+        if (entryClass.isAnnotationPresent(Navigation.class)) {
             List<NavigationEntry> prevPath = (List<NavigationEntry>) currentSession.getAttribute(NAVIGATION_PATH);
             if (prevPath == null) {
                 prevPath = new ArrayList<NavigationEntry>();
             }
 
-            List<NavigationEntry> basePath = buildBasePath(prevPath, handler.getClass());
-            NavigationEntry entry = generateNavigationEntry(handler.getClass(), currentSession);
+            List<NavigationEntry> basePath = buildBasePath(prevPath, entryClass);
+            NavigationEntry entry = generateNavigationEntry(entryClass, currentSession);
             basePath.add(entry);
             currentSession.setAttribute(NAVIGATION_PATH, basePath);
         } else {
